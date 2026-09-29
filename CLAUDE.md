@@ -20,6 +20,13 @@ Lynn is **not technical**. Write to her as a helpful, friendly editor's assistan
 - Don't change the wording of her articles beyond what's needed to lay them out, except to fix
   obvious typos from scanning/OCR – and tell her about any such fixes. Keep Australian/British spelling.
 
+## Style guide
+
+`style-guide.md` holds Lynn's rules for how the site looks and reads. Read it before making any change to
+the site or an article and follow it. Whenever Lynn gives a new rule or preference ("always…", "never…",
+"I don't like…"), apply it and add it to `style-guide.md` in the right section, in plain words, without asking.
+Tell her briefly that you've noted it. If a new rule conflicts with an existing one, ask her which she prefers.
+
 ## What Lynn typically asks for
 
 | She says… | Use |
