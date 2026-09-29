@@ -1,0 +1,46 @@
+# Elseyworks – outstanding tasks
+
+_Last updated 2026-09-29. Local `main` is 3 commits ahead of GitHub (not pushed); everything from item 1 below is uncommitted._
+
+## 1. Finish the tracked-changes proofreading tool (in progress, uncommitted)
+- [ ] Re-run `uv run pytest`, `uv run ruff check .` and `uv run mypy --strict scripts tests` (last run had 2 test failures; both fixed in code but not re-run: `<br>` spacing in `parse_inline`, and the round-trip test wrongly dropping the first paragraph).
+- [ ] Fix the remaining `ruff` findings in `scripts/proof_docx.py`: too-many-locals in `parse_article`, `itertools.pairwise` in `locate_edits`, "Returns" sections missing from docstrings, and too many statements in the `try` block in `main`.
+- [ ] Write `.claude/skills/proofread-article/SKILL.md` (typos only; up to ~5 fixes listed in chat; more than that → Word document with tracked changes via `scripts/proof_docx.py make`, wait for the reader, then `diff` and apply their accepted wording).
+- [ ] Add `proof_docx.py` and the new skill to `CLAUDE.md` (skills table + technical reference) and `README.md`.
+- [ ] Check the generated `.docx` opens correctly in real Word (tracked changes and comments show; no "repair" prompt). Only pandoc has read it so far.
+- [ ] Commit (don't push).
+
+## 2. Proofreading the existing articles
+- [ ] Run the `proofread-article` workflow on the other 24 articles, one at a time, typos and OCR errors only.
+- [ ] The Wild West is done. Nick confirmed the three guesses ("eastwards", "Yakima Valley Red", "Thu-Sun"). Still open: whether "brick-buildinged" is original wording, and the `+ 1 589 522 1234` phone number (other Walla Walla numbers use 509).
+- [ ] Optional: check The Wild West against the Decanter PDF.
+
+## 3. Set up Lynn's desktop (needs Nick at her machine)
+- [ ] Install Claude Code (desktop app) and sign her in.
+- [ ] Install Homebrew, then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
+- [ ] Clone `NickElseySpelloC/Elseyworks` and give her machine git push access (GitHub login / token or SSH key). Check `git push` works.
+- [ ] Open the project in Claude Code and confirm `CLAUDE.md` and the skills load (`add-article`, `edit-article`, `preview`, `publish`).
+- [ ] Confirm Word (or Pages) is installed and that `open` starts it for `.docx` files.
+- [ ] Check her machine handles the preview at `http://localhost:1313/` and the `~/Documents/Elseyworks/` folder for Word files.
+- [ ] Dry-run the full workflow with her: add a real (or throwaway) article from a scanned PDF → Word proofread → preview → publish. Delete any throwaway afterwards.
+- [ ] Walk her through the preview / approve / publish flow and how to ask for changes.
+- [ ] Decide what she does if something goes wrong (call Nick). Consider a short one-page "how to talk to your assistant" sheet.
+
+## 4. Help skill (Nick to explain)
+- [ ] Create a "Help skill" for Lynn. Details to come from Nick.
+
+## 5. Design and site follow-ups
+- [ ] Nick's style-guide document from Lynn: fold into `style-guide.md` (currently: headlines one font/colour with no trailing full stop; always light).
+- [ ] "Elsey*works*" logo is two-tone – ask Lynn whether she wants it one style (the headline rule may not apply to a logo).
+- [ ] Mobile layout check of all page types (only checked on a desktop viewport so far); check dark-mode removal looks right on phones.
+- [ ] Contact form: send a real test message through Web3Forms and confirm it reaches Lynn.
+- [ ] Article thumbnails are a mix of covers and landscapes; review cards on each subject page and re-crop any that look poor.
+- [ ] Google Analytics ID (`G-G6X0C9Z7F4`) – confirm it is the right property for this site.
+- [ ] Redirects from elseyworld.com to elseyworks.com (Nick, Cloudflare) once ready.
+- [ ] The featured articles on the home page (Verona, Age Discrimination, Rome, Terri Janke) were my picks – get Lynn's choices.
+- [ ] Optional: site search, sitemap/SEO check, RSS.
+
+## 6. Housekeeping
+- [ ] Push the 3 local commits (and later ones) when the connection is good.
+- [ ] Verify the GitHub Pages deploy after each push.
+- [ ] `git status` clean-up: `.claude/settings.local.json` is per-machine; consider adding it to `.gitignore`.
