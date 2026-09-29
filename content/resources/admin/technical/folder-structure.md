@@ -11,7 +11,7 @@ This page documents the key folders and files in the ElseyWorld repository.
 ## Top-level overview
 
 ```
-Elseyworld/
+Elseyworks/
 ├── archetypes/       # Default front matter templates for new pages
 ├── assets/           # Source files processed by Hugo (CSS, images)
 ├── config/           # Hugo site configuration files

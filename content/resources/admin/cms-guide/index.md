@@ -4,11 +4,11 @@ description: "Guide to posting a blog or article on ElseyWorld using Content Man
 date: '2026-04-14T17:00:39+10:00'
 thumbnail: cms-screen-shot.png
 ---
-Using the Elseyworld Content Management System.
+Using the Elseyworks Content Management System.
 
 ## Step 1: Log In
 
-1. Go to **[elseyworld.com/admin](https://elseyworld.com/admin)**
+1. Go to **[elseyworks.com/admin](https://elseyworks.com/admin)**
 2. Click **"Login with GitHub"**
 3. If prompted, authorise the app on GitHub
 4. You'll land on the Decap CMS dashboard
@@ -74,7 +74,7 @@ When you're happy with the post:
 2. Switch it to **OFF** (false)
 3. Click **"Publish"**
 
-This commits the post to GitHub. Within about **2 minutes**, GitHub Actions will automatically rebuild the site and your post will appear live at **<https://elseyworld.com>**.
+This commits the post to GitHub. Within about **2 minutes**, GitHub Actions will automatically rebuild the site and your post will appear live at **<https://elseyworks.com>**.
 
 ## Things to Remember
 

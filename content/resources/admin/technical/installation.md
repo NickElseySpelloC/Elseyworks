@@ -15,11 +15,11 @@ The main engine that generates the site content from the markdown files and Tail
 
 ### Congo Theme
 
-Implements the theme for the Elseyworld site 
+Implements the theme for the Elseyworks site 
 
 ### Cloudflare
 
-Provides DNS services for elseyworld.com as well as automatic SSL (via Let's Encrypt) and the worker for Decap CMS authorisation.
+Provides DNS services for elseyworks.com as well as automatic SSL (via Let's Encrypt) and the worker for Decap CMS authorisation.
 
 ### GitHub Pages
 

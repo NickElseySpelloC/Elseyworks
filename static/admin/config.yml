@@ -2,7 +2,7 @@ backend:
   name: github
   repo: NickElseySpelloC/ElseyWorld
   branch: main
-  base_url: https://elseyworld.com
+  base_url: https://elseyworks.com
   auth_endpoint: /oauth
 media_folder: "static/img/uploads"
 public_folder: "/img/uploads"

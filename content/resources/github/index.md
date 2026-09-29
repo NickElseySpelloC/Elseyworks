@@ -6,7 +6,7 @@ layout: simple
 thumbnail: github-screen-shot.png
 githubUser: "NickElseySpelloC"
 githubExclude:
-  - https://github.com/NickElseySpelloC/Elseyworld
+  - https://github.com/NickElseySpelloC/Elseyworks
   - https://github.com/NickElseySpelloC/gitissues
   - https://github.com/NickElseySpelloC/issuesonly
   - https://github.com/NickElseySpelloC/org_enums

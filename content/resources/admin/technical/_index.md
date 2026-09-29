@@ -12,7 +12,7 @@ showBreadcrumbs: true
 ```bash
 cd ~/dev
 
-git clone https://github.com/NickElseySpelloC/Elseyworld
+git clone https://github.com/NickElseySpelloC/Elseyworks
 
 git submodule update --init --recursive
 ```
@@ -192,6 +192,6 @@ The github workflow (see `/.github/workflows/deploy.yml`) will (on the Github se
 - Check out the site 
 - Setup Hugo 
 - Build the site
-- Deploy to Github pages: https://github.com/NickElseySpelloC/Elseyworld/deployments/github-pages
+- Deploy to Github pages: https://github.com/NickElseySpelloC/Elseyworks/deployments/github-pages
 
 ---

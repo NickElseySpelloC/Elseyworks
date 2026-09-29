@@ -26,7 +26,7 @@ jobs:
               sudo dpkg -i hugo.deb
 
           - name: Build
-            run: hugo --minify --baseURL "https://elseyworld.com/"
+            run: hugo --minify --baseURL "https://elseyworks.com/"
 
           - name: Upload artifact
             uses: actions/upload-pages-artifact@v3
