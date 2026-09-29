@@ -14,11 +14,11 @@ They do things differently out here. Nike, Microsoft, Starbucks and the odd volc
 
 Down the coast in California, flash and extravagance are the norm. The wine industry follows suit in the Napa and Sonoma valleys where wineries function as theme parks and getting a table at chef Thomas Keller's French Laundry becomes more important than the meal itself.
 
-Up north, spectacular scenery - majestic mountains, carpets of ever­green forests, rushing rivers - does the shouting. Everything else just goes about life with a quiet ease.
+Up north, spectacular scenery - majestic mountains, carpets of evergreen forests, rushing rivers - does the shouting. Everything else just goes about life with a quiet ease.
 
 Oregon caught the world's attention with sumptuous Pinot Noirs, these days her Pinot Cris are drawing accolades and awards. Washington State, Oregon's neighbour to the north, has quietly turned into one of the country's most watched wine-producing regions and is now America's second largest producer of premium wines.
 
-Portland is big enough to offer first-class hotels, excellent restaurants and lots of antique stores without the less desirable trappings - traffic, noise, urban sprawl - of a large metropolis. Constant reminders of the surrounding natural beauty are on every corner: bronze bears frolic in fountains, traffic yields to the majestic elk statue smack in the middle of Main Street and the Willamette River babbles through the centre of the city. The snowy peak of stately Mount Hood frames Portland, on clear days the remnants of Mt St Helens and other, still intact, volcmoes add an extra touch of drama.
+Portland is big enough to offer first-class hotels, excellent restaurants and lots of antique stores without the less desirable trappings - traffic, noise, urban sprawl - of a large metropolis. Constant reminders of the surrounding natural beauty are on every corner: bronze bears frolic in fountains, traffic yields to the majestic elk statue smack in the middle of Main Street and the Willamette River babbles through the centre of the city. The snowy peak of stately Mount Hood frames Portland, on clear days the remnants of Mt St Helens and other, still intact, volcanoes add an extra touch of drama.
 
 ## ON THE TOWN
 
@@ -28,7 +28,7 @@ A few blocks away, Greg Higgins matches the delights of Pacific Northwest wines 
 
 To stay in Portland, both the Hotel Lucia and the Heathman Hotel provide mature comforts with style.
 
-With Portland as your base, an hour's drive places you in the centre of the North Willamette Valley wine region. Function definitely takes precedence over style in the quiet valley. Wineries are usually small. It is rare to find anything other than wine to buy. Some are only open for tasting by appointment, othen, such as Beaux Frères, not at all.
+With Portland as your base, an hour's drive places you in the centre of the North Willamette Valley wine region. Function definitely takes precedence over style in the quiet valley. Wineries are usually small. It is rare to find anything other than wine to buy. Some are only open for tasting by appointment, others, such as Beaux Frères, not at all.
 
 ## OREGON GUIDE BOOK
 
@@ -45,7 +45,7 @@ Tel: + 1 503 864 2700<br>
 **Don't miss**: Louise Drouhin Pinot Noir, Chardonnay Red Hills Estate
 
 ARCHERY SUMMIT WINERY<br>
-**Tasting**: The-Sun: reservations are required. Archery Summit Road, Dayton<br>
+**Tasting**: Thu-Sun: reservations are required. Archery Summit Road, Dayton<br>
 Tel: + 1 503 864-4300<br>
 **Don't miss**: 1999 Archery Summit Estate; 2000 Vireton-Blanc de Collines Rouges
 
@@ -66,7 +66,7 @@ Tel: +1 503 228 4655<br>
 JOEL PALMER HOUSE, 600 Ferry Street, Dayton.<br>
 Tel: +1 503 864 2995 (call for directions). A must for fungi aficionados.
 
-### Accomodation
+### Accommodation
 
 HOTEL LUCIA, 400 SW Broadway<br>
 Tel: +1 503 225 1717<br>
@@ -76,17 +76,15 @@ Tel: +1 503 241 4100
 
 _More info: Portland Oregon Visitors Association, 1000 SW Broadway, Suite 2300, Portland, OR 97205. Tel: +1 503 275 9750._
 
-Visitors who venture to the eastern side of the cascade Mountains should prepare for a visual shock. While the western slopes of the Pacific Northwest are defined by swathes of
-
-emerald, eastwanfs green gives way to brown rolling hills. Central Washington is as dry and sunny as the coastal flank is wet and cloudy. Sagacious Pinots deflect to fuller­-bodied cabernets and Merlots.
+Visitors who venture to the eastern side of the cascade Mountains should prepare for a visual shock. While the western slopes of the Pacific Northwest are defined by swathes of emerald, eastwards green gives way to brown rolling hills. Central Washington is as dry and sunny as the coastal flank is wet and cloudy. Sagacious Pinots deflect to fuller-bodied cabernets and Merlots.
 
 Walla Walla is a five-hour drive from almost everywhere. The journey from Portland takes you smack through the gorgeous Columbia Gorge into the heart of a wilder west.
 
 For years Walla Walla was off the beaten track. The small college town was best known for its occasional mention as a generic remote location and its delicious sweet onions.
 
-Leonetti set up shop in 1977; an auspicious precursor to the 30+, often highly acclaimed wineries in the area today. Walla Walla's wine industry is informal, small and often innovative. The proof is in the buildings. Wine is poured in old school houses, trolley stations and mills. Reininger Winery was founded in the original 'crash house' (runway fire engine house) at the Walla Walla Aiiport.
+Leonetti set up shop in 1977; an auspicious precursor to the 30+, often highly acclaimed wineries in the area today. Walla Walla's wine industry is informal, small and often innovative. The proof is in the buildings. Wine is poured in old school houses, trolley stations and mills. Reininger Winery was founded in the original 'crash house' (runway fire engine house) at the Walla Walla Airport.
 
-Walla walla's remote location helps retain the low-key flavour of the area but, fortunately, the gourmands have found their way to the city's historic brick-buildinged downtown.
+Walla Walla's remote location helps retain the low-key flavour of the area but, fortunately, the gourmands have found their way to the city's historic brick-buildinged downtown.
 
 'You can't go wrong with Whitehouse-Crawford,' says Darcey Fugman-Small, of Woodward Canyon Winery, 'it's the nicest place in town.' Other favourites include Creektown Café, perfect for alfresco dining, and the Grapefields wine bar with its 'cool atmosphere and good food'.
 
@@ -104,10 +102,10 @@ CAYUSE VINEYARDS<br>
 
 WOODWARD CANYON<br>
 **Tasting**:  Daily. Lowden. Tel:+ 1 509 525 4129<br>
-**Don't Miss**: 2000 Walla Walla Valley and Columbia Yallay Marlots, all the Cabernet Sauvignons and Columbia Valley Chardonnay
+**Don't Miss**: 2000 Walla Walla Valley and Columbia Valley Merlots, all the Cabernet Sauvignons and Columbia Valley Chardonnay
 
 REININGER WINERY<br>
-**Tasting**: 'If we're here, w're open.' Appointments useful. C Street. Walla Walla.<br>
+**Tasting**: 'If we're here, we're open.' Appointments useful. C Street. Walla Walla.<br>
 Tel: +1 509 522 1994<br>
 **Don't Miss**: 1999 Cabernet Sauvignon Walla Walla Valley. 1999 Medal Walla Walla Valley
 
@@ -124,12 +122,12 @@ Tel: +1 509 522 3993<br>
 WHITEHOUSE-CRAWFORD RESTAURANT. 55 Cherry Street. Walla Walla.<br>
 Tel: + 1 509 525 2222
 
-### Accomodation
+### Accommodation
 
 MILL CREEK INN. 2014 Mill Creek Road, Walla Walla.<br>
-Tel: + 1 589 522 1234. This old wheat ranch offers collage, barn and hayloft accomodation with fantastic views.
+Tel: + 1 589 522 1234. This old wheat ranch offers cottage, barn and hayloft accommodation with fantastic views.
 
-MARCUS WHITMAN HOTEL, 6 West Rose Steet. Walla Walla.<br>
+MARCUS WHITMAN HOTEL, 6 West Rose Street. Walla Walla.<br>
 Tel: +1 509 525 2200. A historic building in the town centre.
 
 _More info: Walla Walla Chamber of Commerce, PO BOX 644, Walla Walla, WA 99362 Tel: +1 509 525 0850_
@@ -159,17 +157,17 @@ Tel: +1 425 415 3632
 DELILLE CELLARS<br>
 **Tasting**: By appointment only, Fri preferred. Woodinville<br>
 Tel: +1 425 489 0544<br>
-**Don't Miss**: Velvety Syrahs, Chaleur Estat, Yaldma Valley Red, Chaleur Estate Blanc
+**Don't Miss**: Velvety Syrahs, Chaleur Estate, Yakima Valley Red, Chaleur Estate Blanc
 
 CADENCE WINERY<br>
 **Tasting**: By appointment. Seattle<br>
 Tel: +1 206 381 9507<br>
-**Don't Miss**: Reserve 2000, Tapteil 2000, Ciel du Cheval, Sprint Valley 2000
+**Don't Miss**: Reserve 2000, Tapteil 2000, Ciel du Cheval, Spring Valley 2000
 
 HEDGES CELLARS<br>
-**Tasting: Mon-Sat.** lssaquah.<br>
+**Tasting: Mon-Sat.** Issaquah.<br>
 Tel: +1 425 391 6056<br>
-**Don't miss:** Red Mountain Reserve. Three Vinyards
+**Don't miss:** Red Mountain Reserve. Three Vineyards
 
 ### Dining
 
@@ -182,15 +180,15 @@ Tel: +1 206 728 2800<br>
 RAYS BOATHOUSE. 6049 Seaview Ave. NW.<br>
 Tel: +1 206 789 3770
 
-### Accomodation
+### Accommodation
 
-ALEXIS HOTEL. 1007 First Avanue, Seattle.<br>
+ALEXIS HOTEL. 1007 First Avenue, Seattle.<br>
 Tel: +1 206 624 4844. Superlative service.
 
 THE WILLOWS LODGE. 14580 NE 145th St, Woodinville.<br>
 Tel: +1 425 424 3900. Lodge style accomodation.
 
-_For free information and visitor guides call Washington State Tourism on +44 (O) 20 7978 5233 or visit [www.experiencewashington.com](www.experiencewashington.com)_
+_For free information and visitor guides call Washington State Tourism on +44 (0) 20 7978 5233 or visit [www.experiencewashington.com](https://www.experiencewashington.com)_
 
 **Originally published in the June 2003 edition of [Decanter Magazine](the-wild-west-decanter-magazine.pdf).**
 
