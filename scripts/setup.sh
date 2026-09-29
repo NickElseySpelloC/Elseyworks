@@ -3,6 +3,6 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 command -v brew >/dev/null || { echo "Homebrew is required: https://brew.sh"; exit 1; }
-brew install hugo poppler uv git
+brew install hugo poppler pandoc uv git
 uv sync
 echo "Setup complete."

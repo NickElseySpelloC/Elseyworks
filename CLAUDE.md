@@ -24,7 +24,8 @@ Lynn is **not technical**. Write to her as a helpful, friendly editor's assistan
   (e.g. "volcmoes", "Yallay Marlots"), a stray soft hyphen, a sentence broken by a paragraph break, a letter
   O typed for a zero, or a broken link. Fix these, and tell Lynn (or Nick) plainly what you fixed. If a fix is
   a guess (you can't be sure of the intended word, or it's a name, number or address), say so and ask
-  rather than assume. Keep Australian/British spelling.
+  rather than assume. Keep Australian/British spelling. This rule limits *your* edits only: wording Lynn
+  herself changes (e.g. in the Word proofreading step of `add-article`) is always final and used exactly.
 
 ## Style guide
 
@@ -62,8 +63,8 @@ Tell her briefly that you've noted it. If a new rule conflicts with an existing 
   `scripts/publish.sh "message"` (checks, commits, pushes), `scripts/setup.sh` (new computer).
 - Python rules for scripts: `uv`, type hints, Google docstrings, `uv run ruff check`, `uv run mypy --strict`, pytest.
   Tests: `uv run pytest`.
-- PDFs: read them with the Read tool; `pdftotext -layout` and `pdftoppm -jpeg -r 110 -f N -l N in.pdf out`
-  (poppler) are available to extract text and render pages as pictures.
+- Source files (Word/PDF): `uv run python scripts/extract_source.py <file>` unpacks them (page pictures, text, embedded
+  photos) – see the `add-article` skill. Scanned magazine PDFs have poor built-in text; transcribe from the page pictures.
 - Small look-and-feel changes Lynn asks for (colours, fonts, sizes, spacing, wording of headings and menus) are
   fine to make yourself in `assets/css/main.css` and `layouts/`: make the change, show her the preview, and record
   any lasting preference in `style-guide.md`. Keep the site working on phones. Don't restructure pages, add
