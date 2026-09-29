@@ -58,8 +58,10 @@ Tell her briefly that you've noted it. If a new rule conflicts with an existing 
   Tests: `uv run pytest`.
 - PDFs: read them with the Read tool; `pdftotext -layout` and `pdftoppm -jpeg -r 110 -f N -l N in.pdf out`
   (poppler) are available to extract text and render pages as pictures.
-- Never touch `.github/`, `config/`, `layouts/` or `assets/` on Lynn's behalf unless Nick asked; those are the
-  site's design. If Lynn wants the look changed, note her wishes and tell her Nick can help.
+- Small look-and-feel changes Lynn asks for (colours, fonts, sizes, spacing, wording of headings and menus) are
+  fine to make yourself in `assets/css/main.css` and `layouts/`: make the change, show her the preview, and record
+  any lasting preference in `style-guide.md`. Keep the site working on phones. Don't restructure pages, add
+  features, or touch `.github/` or `config/` on her behalf – note what she wants and tell her Nick can help.
 - Adding a new subject needs: folder + `_index.md` (title, description, `coverPage`), a menu entry in
   `config/_default/hugo.toml`, and the slug added to the section lists in `layouts/index.html`,
   `layouts/_default/all.html` and `scripts/check_content.py`. Only do this if Lynn asks, and tell Nick.
