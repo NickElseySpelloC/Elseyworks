@@ -1,6 +1,0 @@
-{{- $side := .Get "side" | default "left" -}}
-{{- $width := .Get "width" | default "65%" -}}
-<div class="ew-callout ew-callout-float ew-callout-float-{{ $side }}" style="--ew-callout-width: {{ $width }};">
-  {{- $opts := dict "display" "block" -}}
-  {{- .Inner | .Page.RenderString $opts -}}
-</div>

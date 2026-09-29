@@ -1,0 +1,5 @@
+{{- /* Cover image for a section: thumbnail of the article named by the section's coverPage param */ -}}
+{{- $img := "" -}}
+{{- with .Params.coverPage }}{{ with site.GetPage . }}{{ $img = partial "thumb.html" . }}{{ end }}{{ end -}}
+{{- if not $img }}{{ with index .RegularPages 0 }}{{ $img = partial "thumb.html" . }}{{ end }}{{ end -}}
+{{- return $img -}}

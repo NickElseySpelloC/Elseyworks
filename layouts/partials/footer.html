@@ -1,80 +1,13 @@
-{{ $contactPage := site.GetPage "/contact" }}
-{{ $privacyPage := or (site.GetPage "/resources/privacy-policy") (site.GetPage "/resources/privacy-policy.md") }}
-
-<footer class="py-10 print:hidden">
-  <div class="flex items-center justify-between gap-6">
-    <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400" style="gap: 2rem;">
-      {{ if .Site.Params.footer.showCopyright | default true }}
-        <p class="whitespace-nowrap">
-          {{- with site.Copyright }}
-            {{ . | emojify | markdownify }}
-          {{- else }}
-            &copy;
-            {{ now.Format "2006" }}
-            {{ .Site.Language.Params.Author.name | markdownify | emojify }}
-          {{- end }}
-        </p>
-      {{ end }}
-
-      <nav class="font-medium" aria-label="Footer">
-        <ul class="flex list-none items-center" style="gap: 2rem;">
-          <li>
-            <a
-              href="{{ with $contactPage }}{{ .RelPermalink }}{{ else }}/contact/{{ end }}"
-              class="whitespace-nowrap decoration-primary-500 hover:text-primary-600 hover:underline hover:decoration-2 hover:underline-offset-2 dark:hover:text-primary-400"
-            >
-              Contact
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{ with $privacyPage }}{{ .RelPermalink }}{{ else }}/resources/privacy-policy/{{ end }}"
-              class="whitespace-nowrap decoration-primary-500 hover:text-primary-600 hover:underline hover:decoration-2 hover:underline-offset-2 dark:hover:text-primary-400"
-            >
-              Privacy Policy
-            </a>
-          </li>
-        </ul>
-      </nav>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="brand-mark small">Elsey<em>works</em></p>
+      <p class="muted">The writing of Lynn Elsey.</p>
     </div>
-
-    <div class="flex flex-row items-center">
-      {{ if .Site.Params.footer.showAppearanceSwitcher | default false }}
-        <div
-          class="{{ if .Site.Params.footer.showScrollToTop | default true -}}
-            me-14
-          {{- end }} cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
-        >
-          <button id="appearance-switcher-0" type="button" aria-label="appearance switcher">
-            <div
-              class="flex h-12 w-12 items-center justify-center dark:hidden"
-              title="{{ i18n "footer.dark_appearance" }}"
-            >
-              {{ partial "icon.html" "moon" }}
-            </div>
-            <div
-              class="hidden h-12 w-12 items-center justify-center dark:flex"
-              title="{{ i18n "footer.light_appearance" }}"
-            >
-              {{ partial "icon.html" "sun" }}
-            </div>
-          </button>
-        </div>
-      {{ end }}
-    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      {{- range site.Menus.main }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}
+      <a href="{{ site.Params.linkedin }}" rel="me noopener" target="_blank">LinkedIn</a>
+    </nav>
   </div>
-
-  {{ if .Site.Params.footer.showThemeAttribution | default true }}
-    <p class="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
-      {{ $hugo := printf `<a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
-        href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a>`
-      }}
-      {{ $congo := printf `<a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://github.com/jpanther/congo" target="_blank" rel="noopener noreferrer">Congo</a>` }}
-      {{ i18n "footer.powered_by" (dict "Hugo" $hugo "Congo" $congo) | safeHTML }}
-    </p>
-  {{ end }}
-
-  {{ if templates.Exists "_partials/extend-footer.html" }}
-    {{ partial "extend-footer.html" . }}
-  {{ end }}
+  <div class="wrap"><p class="copyright">© {{ now.Year }} Lynn Elsey. All articles remain the property of their author and original publishers.</p></div>
 </footer>

@@ -1,0 +1,5 @@
+{{- /* Resolve an article's thumbnail resource. Usage: partial "thumb.html" .Page — returns the image resource or nil */ -}}
+{{- $img := "" -}}
+{{- with .Params.thumbnail }}{{ $img = $.Resources.GetMatch . }}{{ end -}}
+{{- if not $img }}{{ $img = index ($.Resources.ByType "image") 0 }}{{ end -}}
+{{- return $img -}}

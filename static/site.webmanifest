@@ -1,19 +1,11 @@
 {
-  "name": "Elsey World",
-  "short_name": "EW",
+  "name": "Elseyworks",
+  "short_name": "Elseyworks",
   "icons": [
-    {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    }
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
   ],
-  "theme_color": "#0f1729",
-  "background_color": "#0f1729",
+  "theme_color": "#FBF7F0",
+  "background_color": "#FBF7F0",
   "display": "standalone"
 }

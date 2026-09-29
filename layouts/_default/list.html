@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{- $cover := partial "cover.html" . -}}
+<section class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div>
+      <p class="kicker">Writing</p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.intro | default .Description }}<p class="deck">{{ . }}</p>{{ end }}
+      <p class="muted count">{{ len .RegularPages }} article{{ if ne (len .RegularPages) 1 }}s{{ end }}</p>
+    </div>
+    {{- with $cover }}{{ $r := .Fill "900x600 q80 Smart" }}
+    <img class="page-hero-img" src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="">{{ end }}
+  </div>
+</section>
+<section class="wrap section">
+  <div class="grid">
+    {{- range .RegularPages.ByDate.Reverse }}
+    {{ partial "card.html" (dict "page" . "size" "normal") }}
+    {{- end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{- $img := partial "thumb.html" . -}}
+<article class="article">
+  <header class="article-head wrap-narrow">
+    <p class="kicker"><a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a>{{ with .Params.publication }} · {{ . }}{{ end }}</p>
+    <h1>{{ .Title }}</h1>
+    {{- /* the body's lead paragraph doubles as the standfirst, so only show the description if there is none */ -}}
+    {{ if not (strings.Contains .Content `class="lead"`) }}{{ with .Description }}<p class="deck">{{ . }}</p>{{ end }}{{ end }}
+    <p class="byline">By <strong>Lynn Elsey</strong> · {{ .Date.Format "January 2006" }} · {{ .ReadingTime }} min read</p>
+  </header>
+  <div class="article-body wrap-narrow prose">
+    {{ .Content }}
+    <div class="clear-float"></div>
+  </div>
+  {{- with .Resources.ByType "application" }}{{ range . }}{{ if strings.HasSuffix .Name ".pdf" }}
+  <p class="wrap-narrow pdf-link"><a class="btn btn-ghost" href="{{ .RelPermalink }}">Read the original as published (PDF)</a></p>
+  {{- end }}{{ end }}{{ end }}
+  <nav class="wrap-narrow pager" aria-label="More in {{ .Parent.Title }}">
+    {{- with .PrevInSection }}<a class="pager-prev" href="{{ .RelPermalink }}"><span class="kicker">Older</span><span>{{ .Title }}</span></a>{{ end }}
+    {{- with .NextInSection }}<a class="pager-next" href="{{ .RelPermalink }}"><span class="kicker">Newer</span><span>{{ .Title }}</span></a>{{ end }}
+  </nav>
+</article>
+{{ end }}

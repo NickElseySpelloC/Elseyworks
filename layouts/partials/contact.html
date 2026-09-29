@@ -1,0 +1,25 @@
+<form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="{{ site.Params.contactAccessKey }}">
+  <input type="hidden" name="subject" value="Message from elseyworks.com">
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+  <label>Name<input type="text" name="name" required></label>
+  <label>Email<input type="email" name="email" required></label>
+  <label>Message<textarea name="message" rows="5" required></textarea></label>
+  <button type="submit" class="btn">Send message</button>
+  <p class="form-result" role="alert" hidden></p>
+</form>
+<script>
+(function () {
+  var form = document.getElementById('contact-form'), out = form.querySelector('.form-result'), btn = form.querySelector('button');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    btn.disabled = true; btn.textContent = 'Sending…';
+    var data = {}; new FormData(form).forEach(function (v, k) { data[k] = v; });
+    fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (r) { out.hidden = false; out.className = 'form-result ' + (r.ok ? 'ok' : 'err'); out.textContent = r.ok ? 'Thank you – your message is on its way.' : (r.j.message || 'Something went wrong. Please try again.'); if (r.ok) form.reset(); })
+      .catch(function () { out.hidden = false; out.className = 'form-result err'; out.textContent = 'Could not send – please check your connection and try again.'; })
+      .finally(function () { btn.disabled = false; btn.textContent = 'Send message'; });
+  });
+})();
+</script>

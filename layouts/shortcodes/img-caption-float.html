@@ -1,43 +1,6 @@
-{{- $width := .Get "width" -}}
-{{- $height := .Get "height" -}}
-{{- $widthValue := "" -}}
-{{- $heightValue := "" -}}
-{{- $styleValue := "" -}}
-{{- $styleAttr := "" -}}
-{{- if $width -}}
-    {{- if findRE "^\\d+$" $width -}}
-        {{- $widthValue = printf "%vpx" $width -}}
-    {{- else -}}
-        {{- $widthValue = printf "%v" $width -}}
-    {{- end -}}
-{{- end -}}
-{{- if $height -}}
-    {{- if findRE "^\\d+$" $height -}}
-        {{- $heightValue = printf "%vpx" $height -}}
-    {{- else -}}
-        {{- $heightValue = printf "%v" $height -}}
-    {{- end -}}
-{{- end -}}
-{{- if or $widthValue $heightValue -}}
-    {{- with $widthValue -}}{{- $styleValue = printf "%swidth: %s;" $styleValue . -}}{{- end -}}
-    {{- with $heightValue -}}{{- $styleValue = printf "%s height: %s;" $styleValue . -}}{{- end -}}
-    {{- if and $widthValue (not $heightValue) -}}{{- $styleValue = printf "%s height: auto;" $styleValue -}}{{- end -}}
-    {{- if and $heightValue (not $widthValue) -}}{{- $styleValue = printf "%s width: auto;" $styleValue -}}{{- end -}}
-    {{- $styleAttr = printf "style=%q" $styleValue -}}
-{{- end -}}
-<figure class="float-{{ .Get "side" }}">
-        {{ with .Get "href" }}
-                <a href="{{ . }}">
-        {{ end }}
-        <img src="{{ .Get "src" }}"
-                 alt="{{ .Get "alt" }}"
-                 {{ with $width }}width="{{ . }}"{{ end }}
-                 {{ with $height }}height="{{ . }}"{{ end }}
-                 {{ $styleAttr | safeHTMLAttr }}>
-        {{ with .Get "href" }}
-                </a>
-        {{ end }}
-        <figcaption>
-                {{ .Get "caption" }}
-        </figcaption>
+<figure class="fig fig-float fig-{{ .Get "side" | default "right" }}">
+  {{- with .Get "href" }}<a href="{{ . }}">{{ end -}}
+  <img src="{{ .Get "src" }}" alt="{{ .Get "alt" }}" loading="lazy">
+  {{- if .Get "href" }}</a>{{ end -}}
+  {{- with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
 </figure>

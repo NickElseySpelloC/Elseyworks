@@ -1,0 +1,19 @@
+{{- /* Article card. Usage: partial "card.html" (dict "page" . "size" "normal|feature") */ -}}
+{{- $p := .page -}}
+{{- $img := partial "thumb.html" $p -}}
+<a class="card{{ if eq .size "feature" }} card-feature{{ end }}" href="{{ $p.RelPermalink }}">
+  <div class="card-img">
+    {{- with $img }}
+      {{- $w := cond (eq $.size "feature") 1200 720 -}}
+      {{- $h := cond (eq $.size "feature") 800 480 -}}
+      {{- $r := .Fill (printf "%dx%d q80 Smart" $w $h) -}}
+      <img src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="" loading="lazy">
+    {{- end }}
+  </div>
+  <div class="card-body">
+    <p class="kicker">{{ $p.Parent.Title }}{{ with $p.Params.publication }} · {{ . }}{{ end }}</p>
+    <h3 class="card-title">{{ $p.Title }}</h3>
+    {{- with $p.Description }}<p class="card-desc">{{ . }}</p>{{ end }}
+    <p class="card-meta">{{ $p.Date.Format "January 2006" }}</p>
+  </div>
+</a>

@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="wrap about">
+  <div class="about-photo">
+    {{- with resources.Get "img/lynn.jpg" }}{{ $r := .Fill "800x1000 q85 Smart" }}
+    <img src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="Lynn Elsey">{{ end }}
+  </div>
+  <div class="about-text prose">
+    <p class="kicker">About</p>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    <p><a class="btn btn-ghost" href="{{ site.Params.linkedin }}" target="_blank" rel="me noopener">Lynn on LinkedIn</a></p>
+  </div>
+</section>
+<section class="wrap-narrow section" id="contact">
+  <h2 class="section-title">Get in touch</h2>
+  <p class="muted">Commissions, questions or just a hello – I’d love to hear from you.</p>
+  {{ partial "contact.html" . }}
+</section>
+{{ end }}

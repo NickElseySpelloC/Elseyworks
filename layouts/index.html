@@ -1,0 +1,65 @@
+{{ define "bodyclass" }}home{{ end }}
+{{ define "main" }}
+{{- $all := where site.RegularPages "Section" "in" (slice "food-travel" "careers" "magazines" "business" "health") -}}
+{{- $featured := first 4 (where $all "Params.featured" true).ByDate.Reverse -}}
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <p class="kicker">Writer · Editor · Publisher</p>
+      <h1>Writing that takes you <em>somewhere.</em></h1>
+      <p class="deck">Two decades of stories on food and travel, careers, health and business – and the magazines Lynn Elsey has edited along the way.</p>
+      <p class="hero-actions">
+        <a class="btn" href="/writing/">Read the writing</a>
+        <a class="btn btn-ghost" href="/about/">About Lynn</a>
+      </p>
+    </div>
+    <div class="hero-photo">
+      {{- with resources.Get "img/lynn.jpg" }}{{ $r := .Fill "760x900 q85 Smart" }}
+      <img src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="Lynn Elsey overlooking Sydney Harbour">{{ end }}
+    </div>
+  </div>
+</section>
+
+{{ with $featured }}
+<section class="wrap section">
+  <div class="section-head"><h2 class="section-title">Featured</h2><a class="more" href="/writing/">All articles →</a></div>
+  <div class="featured-grid">
+    {{- range $i, $p := . }}{{ partial "card.html" (dict "page" $p "size" (cond (eq $i 0) "feature" "normal")) }}{{ end }}
+  </div>
+</section>
+{{ end }}
+
+<section class="band">
+  <div class="wrap section">
+    <div class="section-head"><h2 class="section-title">Browse by subject</h2></div>
+    <div class="tiles">
+      {{- range site.Menus.main }}{{ if ne .Name "About" }}
+      {{- with site.GetPage .PageRef }}
+      {{- $cover := partial "cover.html" . -}}
+      <a class="tile" href="{{ .RelPermalink }}">
+        {{- with $cover }}{{ $r := .Fill "700x500 q80 Smart" }}<img src="{{ $r.RelPermalink }}" width="{{ $r.Width }}" height="{{ $r.Height }}" alt="" loading="lazy">{{ end }}
+        <span class="tile-body">
+          <span class="tile-title">{{ .Title }}</span>
+          <span class="tile-desc">{{ .Description }}</span>
+          <span class="tile-count">{{ len .RegularPages }} articles →</span>
+        </span>
+      </a>
+      {{- end }}{{ end }}{{ end }}
+      <a class="tile tile-all" href="/writing/">
+        <span class="tile-body">
+          <span class="tile-title">Everything, newest first</span>
+          <span class="tile-desc">Browse all {{ len $all }} articles in one place.</span>
+          <span class="tile-count">The full archive →</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><h2 class="section-title">Recent writing</h2><a class="more" href="/writing/">Full archive →</a></div>
+  <div class="grid">
+    {{- range first 6 $all.ByDate.Reverse }}{{ partial "card.html" (dict "page" . "size" "normal") }}{{ end }}
+  </div>
+</section>
+{{ end }}

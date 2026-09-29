@@ -1,0 +1,18 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="wrap">
+    <p class="kicker">The archive</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="deck">{{ . }}</p>{{ end }}
+  </div>
+</section>
+<section class="wrap section">
+  {{- $pages := where site.RegularPages "Section" "in" (slice "food-travel" "careers" "magazines" "business" "health") -}}
+  {{- range $pages.GroupByDate "2006" "desc" }}
+  <h2 class="year">{{ .Key }}</h2>
+  <div class="grid">
+    {{- range .Pages.ByDate.Reverse }}{{ partial "card.html" (dict "page" . "size" "normal") }}{{ end }}
+  </div>
+  {{- end }}
+</section>
+{{ end }}

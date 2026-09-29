@@ -1,11 +1,20 @@
 [project]
 name = "elseyworks"
 version = "0.1.0"
-description = "Add your description here"
+description = "Elseyworks - the writing of Lynn Elsey"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "beautifulsoup4>=4.14.3",
-    "playwright>=1.58.0",
-    "requests>=2.33.1",
+    "pyyaml>=6.0",
 ]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.10",
+    "pytest>=8.0",
+    "ruff>=0.5",
+    "types-pyyaml>=6.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

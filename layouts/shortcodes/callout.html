@@ -1,4 +1,1 @@
-<div class="ew-callout">
-  {{- $opts := dict "display" "block" -}}
-  {{- .Inner | .Page.RenderString $opts -}}
-</div>
+<aside class="callout">{{ .Inner | .Page.RenderString (dict "display" "block") }}</aside>
