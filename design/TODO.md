@@ -11,11 +11,12 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 - [x] Commit (don't push).
 
 ## 2. Proofreading the existing articles
-- [ ] Run the `proofread-article` workflow on the other 24 articles, one at a time, typos and OCR errors only.
-- [ ] The Wild West is done. Nick confirmed the three guesses ("eastwards", "Yakima Valley Red", "Thu-Sun"). Still open: whether "brick-buildinged" is original wording, and the `+ 1 589 522 1234` phone number (other Walla Walla numbers use 509).
-- [ ] Optional: check The Wild West against the Decanter PDF.
+- [x] The Wild West is done. Nick confirmed the three guesses ("eastwards", "Yakima Valley Red", "Thu-Sun"). Still open: whether "brick-buildinged" is original wording, and the `+ 1 589 522 1234` phone number (other Walla Walla numbers use 509).
 
-## 3. Set up Lynn's desktop (needs Nick at her machine)
+## 3. Help skill ✅ DONE (committed, not pushed)
+- [x] Create a "Help skill" for Lynn — `.claude/skills/help/SKILL.md`: friendly plain-English menu of what she can ask for (preview, change an article, proofread, add an article, look-and-feel, publish), expands on any one on request. Added to the `CLAUDE.md` skills table.
+
+## 4. Set up Lynn's desktop (needs Nick at her machine)
 - [ ] Install Claude Code (desktop app) and sign her in.
 - [ ] Install Homebrew, then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
 - [ ] Clone `NickElseySpelloC/Elseyworks` and give her machine git push access (GitHub login / token or SSH key). Check `git push` works.
@@ -26,11 +27,9 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 - [ ] Walk her through the preview / approve / publish flow and how to ask for changes.
 - [ ] Decide what she does if something goes wrong (call Nick). Consider a short one-page "how to talk to your assistant" sheet.
 
-## 4. Help skill (Nick to explain)
-- [ ] Create a "Help skill" for Lynn. Details to come from Nick.
-
 ## 5. Design and site follow-ups
-- [ ] Nick's style-guide document from Lynn: fold into `style-guide.md` (currently: headlines one font/colour with no trailing full stop; always light).
+- [ ] Run the `proofread-article` workflow on the other 24 articles, one at a time, typos and OCR errors only.
+- [ ] Nick's style-guide document from Lyn7n: fold into `style-guide.md` (currently: headlines one font/colour with no trailing full stop; always light).
 - [ ] "Elsey*works*" logo is two-tone – ask Lynn whether she wants it one style (the headline rule may not apply to a logo).
 - [ ] Mobile layout check of all page types (only checked on a desktop viewport so far); check dark-mode removal looks right on phones.
 - [ ] Contact form: send a real test message through Web3Forms and confirm it reaches Lynn.

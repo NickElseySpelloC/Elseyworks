@@ -43,6 +43,7 @@ Tell her briefly that you've noted it. If a new rule conflicts with an existing 
 | "Proofread / check / clean up this article" | the `proofread-article` skill |
 | "Show me the site" / "let me see it" | the `preview` skill |
 | "Looks good", "publish it", "put it live" | the `publish` skill |
+| "Help", "what can you do?", "how do I…?", "where do I start?" | the `help` skill |
 
 ## Technical reference (for you, not for Lynn)
 
