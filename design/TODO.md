@@ -1,14 +1,14 @@
 # Elseyworks – outstanding tasks
 
-_Last updated 2026-09-29. Local `main` is 3 commits ahead of GitHub (not pushed); everything from item 1 below is uncommitted._
+_Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 1 is done._
 
-## 1. Finish the tracked-changes proofreading tool (in progress, uncommitted)
-- [ ] Re-run `uv run pytest`, `uv run ruff check .` and `uv run mypy --strict scripts tests` (last run had 2 test failures; both fixed in code but not re-run: `<br>` spacing in `parse_inline`, and the round-trip test wrongly dropping the first paragraph).
-- [ ] Fix the remaining `ruff` findings in `scripts/proof_docx.py`: too-many-locals in `parse_article`, `itertools.pairwise` in `locate_edits`, "Returns" sections missing from docstrings, and too many statements in the `try` block in `main`.
-- [ ] Write `.claude/skills/proofread-article/SKILL.md` (typos only; up to ~5 fixes listed in chat; more than that → Word document with tracked changes via `scripts/proof_docx.py make`, wait for the reader, then `diff` and apply their accepted wording).
-- [ ] Add `proof_docx.py` and the new skill to `CLAUDE.md` (skills table + technical reference) and `README.md`.
-- [ ] Check the generated `.docx` opens correctly in real Word (tracked changes and comments show; no "repair" prompt). Only pandoc has read it so far.
-- [ ] Commit (don't push).
+## 1. Finish the tracked-changes proofreading tool ✅ DONE (committed, not pushed)
+- [x] Re-run `uv run pytest`, `uv run ruff check .` and `uv run mypy --strict scripts tests` — 20 passed, ruff clean, mypy clean.
+- [x] Fix the remaining `ruff` findings in `scripts/proof_docx.py` (refactored `parse_article` into `_ArticleBuilder`, `itertools.pairwise`, docstrings, `_execute` helper for `main`).
+- [x] Write `.claude/skills/proofread-article/SKILL.md`.
+- [x] Add `proof_docx.py` and the new skill to `CLAUDE.md` (skills table + technical reference) and `README.md`.
+- [x] Check the generated `.docx` opens correctly — validated with `python-docx` (styles map correctly; `w:ins`/`w:del`/comments present) and pandoc round-trip (reject→original, accept→correction). Could not screenshot the Word window (no screen-recording permission), but Word opened it without error.
+- [x] Commit (don't push).
 
 ## 2. Proofreading the existing articles
 - [ ] Run the `proofread-article` workflow on the other 24 articles, one at a time, typos and OCR errors only.

@@ -40,6 +40,7 @@ Tell her briefly that you've noted it. If a new rule conflicts with an existing 
 |---|---|
 | "Add this article" (PDF, Word file, pasted text, link) | the `add-article` skill |
 | "Fix / change / remove …" | the `edit-article` skill |
+| "Proofread / check / clean up this article" | the `proofread-article` skill |
 | "Show me the site" / "let me see it" | the `preview` skill |
 | "Looks good", "publish it", "put it live" | the `publish` skill |
 
@@ -65,6 +66,9 @@ Tell her briefly that you've noted it. If a new rule conflicts with an existing 
   Tests: `uv run pytest`.
 - Source files (Word/PDF): `uv run python scripts/extract_source.py <file>` unpacks them (page pictures, text, embedded
   photos) – see the `add-article` skill. Scanned magazine PDFs have poor built-in text; transcribe from the page pictures.
+- Proofreading with tracked changes: `scripts/proof_docx.py make <article> fixes.json --out <file.docx>` builds a Word
+  document where each proposed typo fix is a tracked change with a comment; `proof_docx.py diff <article> <edited.docx>`
+  lists the wording Lynn accepted so you can apply it. See the `proofread-article` skill.
 - Small look-and-feel changes Lynn asks for (colours, fonts, sizes, spacing, wording of headings and menus) are
   fine to make yourself in `assets/css/main.css` and `layouts/`: make the change, show her the preview, and record
   any lasting preference in `style-guide.md`. Keep the site working on phones. Don't restructure pages, add

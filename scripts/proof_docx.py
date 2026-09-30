@@ -27,10 +27,11 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import difflib
+import itertools
 import json
 import re
 import shutil
-import subprocess
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 import tempfile
 import zipfile
@@ -133,11 +134,82 @@ def parse_inline(text: str, *, bold: bool = False, italic: bool = False) -> list
     )
 
 
+class _ArticleBuilder:
+    """Accumulates article paragraphs while reading the body one line at a time.
+
+    Site shortcodes are simplified: ``lead`` and ``callout`` content becomes ordinary paragraphs
+    (a lead is italic), picture captions become ``[Picture caption: ...]`` paragraphs, and
+    layout-only shortcodes and raw HTML are dropped.
+    """
+
+    def __init__(self) -> None:
+        self.paras: list[Para] = []
+        self._buffer: list[str] = []
+        self._base = "BodyText"   # style outside quotes: BlockText inside a callout
+        self._style = "BodyText"
+        self._italic = False
+
+    def _flush(self) -> None:
+        if self._buffer:
+            runs = parse_inline(" ".join(part.strip() for part in self._buffer))
+            if self._italic:
+                runs = [Run(r.text, r.bold, True) for r in runs]
+            if runs:
+                self.paras.append(Para(self._style, runs))
+        self._buffer = []
+        self._style = self._base
+
+    def _shortcode(self, closing: str, name: str, args: str) -> None:
+        self._flush()
+        if name in {"lead", "callout"}:
+            self._italic = name == "lead" and not closing
+            self._base = "BodyText" if closing or name == "lead" else "BlockText"
+            self._style = self._base
+        elif name.startswith("img") and (cap := _CAPTION.search(args)) and cap.group(1).strip():
+            self.paras.append(Para("BodyText", [Run(f"[Picture caption: {cap.group(1)}]", italic=True)]))
+
+    def feed(self, line: str) -> None:
+        """Process one line of the article body.
+
+        Args:
+            line: A single (right-stripped) line.
+        """
+        code = _SHORTCODE.match(line)
+        if code:
+            self._shortcode(*code.groups())
+            return
+        if not line.strip() or line.lstrip().startswith(("<img", "<figure", "</figure", "<!--")):
+            self._flush()
+            return
+        heading = re.match(r"^(#{1,6})\s+(.*)$", line)
+        if heading:
+            self._flush()
+            self.paras.append(Para(f"Heading{min(len(heading.group(1)), 3)}", parse_inline(heading.group(2))))
+            return
+        if line.lstrip().startswith(">"):
+            quoted = line.lstrip()[1:].strip()
+            if self._style != "BlockText":
+                self._flush()
+                self._style = "BlockText"
+            if quoted:
+                self._buffer.append(quoted)
+            else:
+                self._flush()
+            return
+        self._buffer.append(line)
+
+    def finish(self) -> list[Para]:
+        """Flush any pending text and return the collected paragraphs.
+
+        Returns:
+            The paragraphs in reading order.
+        """
+        self._flush()
+        return self.paras
+
+
 def parse_article(text: str) -> tuple[str, list[Para]]:
     """Read an article's ``index.md`` into a title and paragraphs.
-
-    Site shortcodes are simplified: ``lead`` and ``callout`` content becomes ordinary paragraphs,
-    picture captions become ``[Picture caption: ...]`` paragraphs, and layout-only shortcodes are dropped.
 
     Args:
         text: The full text of ``index.md``.
@@ -152,61 +224,10 @@ def parse_article(text: str) -> tuple[str, list[Para]]:
         if found:
             title = found.group(1).strip().strip("\"'")
         text = text[match.end():]
-
-    paras: list[Para] = []
-    buffer: list[str] = []
-    base = "BodyText"   # style outside quotes: BlockText inside a callout
-    style = base
-    italic_block = False
-
-    def flush() -> None:
-        nonlocal buffer, style
-        if buffer:
-            runs = parse_inline(" ".join(part.strip() for part in buffer))
-            if italic_block:
-                runs = [Run(r.text, r.bold, True) for r in runs]
-            if runs:
-                paras.append(Para(style, runs))
-        buffer = []
-        style = base
-
+    builder = _ArticleBuilder()
     for raw in text.splitlines():
-        line = raw.rstrip()
-        code = _SHORTCODE.match(line)
-        if code:
-            flush()
-            closing, name, args = code.groups()
-            if name in {"lead", "callout"}:
-                italic_block = name == "lead" and not closing
-                base = "BodyText" if closing or name == "lead" else "BlockText"
-                style = base
-            elif name.startswith("img") and (cap := _CAPTION.search(args)) and cap.group(1).strip():
-                paras.append(Para("BodyText", [Run(f"[Picture caption: {cap.group(1)}]", italic=True)]))
-            continue
-        if not line.strip():
-            flush()
-            continue
-        if line.lstrip().startswith(("<img", "<figure", "</figure", "<!--")):
-            flush()
-            continue
-        heading = re.match(r"^(#{1,6})\s+(.*)$", line)
-        if heading:
-            flush()
-            paras.append(Para(f"Heading{min(len(heading.group(1)), 3)}", parse_inline(heading.group(2))))
-            continue
-        if line.lstrip().startswith(">"):
-            quoted = line.lstrip()[1:].strip()
-            if style != "BlockText":
-                flush()
-                style = "BlockText"
-            if quoted:
-                buffer.append(quoted)
-            else:
-                flush()
-            continue
-        buffer.append(line)
-    flush()
-    return title, paras
+        builder.feed(raw.rstrip())
+    return title, builder.finish()
 
 
 def load_fixes(path: Path) -> list[Fix]:
@@ -265,7 +286,7 @@ def locate_edits(paras: list[Para], fixes: list[Fix]) -> dict[int, list[_Edit]]:
             edits.setdefault(index, []).append(_Edit(start, start + len(fix.find), fix.replace, fix.note))
     for index, items in edits.items():
         items.sort(key=lambda e: e.start)
-        for first, second in zip(items, items[1:], strict=False):
+        for first, second in itertools.pairwise(items):
             if second.start < first.end:
                 msg = f"Two fixes overlap in the paragraph beginning {paras[index].text[:40]!r}."
                 raise ValueError(msg)
@@ -278,7 +299,15 @@ def _rpr(run: Run) -> str:
 
 
 def _text_xml(text: str, tag: str) -> str:
-    """Build the XML for text, turning newlines into Word line breaks."""
+    """Build the XML for text, turning newlines into Word line breaks.
+
+    Args:
+        text: The text to wrap.
+        tag: The run-content tag to use (``w:t`` for normal text, ``w:delText`` for deletions).
+
+    Returns:
+        The WordprocessingML for the text.
+    """
     parts = text.split("\n")
     out = []
     for i, part in enumerate(parts):
@@ -367,6 +396,13 @@ def _comments_xml(ids: _Ids, stamp: str) -> str:
 
 def _pandoc(args: list[str], *, stdin: str | None = None) -> str:
     """Run pandoc.
+
+    Args:
+        args: Arguments to pass to pandoc.
+        stdin: Optional text to feed to pandoc's standard input.
+
+    Returns:
+        Pandoc's standard output.
 
     Raises:
         RuntimeError: If pandoc is missing or fails.
@@ -483,6 +519,26 @@ def _article_index(path: Path) -> Path:
     return path / "index.md" if path.is_dir() else path
 
 
+def _execute(args: argparse.Namespace) -> None:
+    """Carry out the chosen sub-command.
+
+    Args:
+        args: Parsed command-line arguments.
+    """
+    title, paras = parse_article(_article_index(args.article).read_text(encoding="utf-8"))
+    if args.command == "make":
+        out = args.out.expanduser()
+        count = build_docx(title, paras, load_fixes(args.fixes), out)
+        print(f"Wrote {out} with {count} proposed change(s).")
+        return
+    original = [_normalise(p.text) for p in paras]
+    edited = docx_paragraphs(args.docx.expanduser())
+    if edited and _normalise(title) == edited[0]:
+        edited = edited[1:]
+    changes = diff_paragraphs(original, edited)
+    print("\n".join(changes) if changes else "No wording differences.")
+
+
 def main() -> int:
     """Command-line entry point.
 
@@ -500,18 +556,7 @@ def main() -> int:
     cmp_.add_argument("docx", type=Path)
     args = parser.parse_args()
     try:
-        title, paras = parse_article(_article_index(args.article).read_text(encoding="utf-8"))
-        if args.command == "make":
-            out = args.out.expanduser()
-            count = build_docx(title, paras, load_fixes(args.fixes), out)
-            print(f"Wrote {out} with {count} proposed change(s).")
-        else:
-            original = [_normalise(p.text) for p in paras]
-            edited = docx_paragraphs(args.docx.expanduser())
-            if edited and _normalise(title) == edited[0]:
-                edited = edited[1:]
-            changes = diff_paragraphs(original, edited)
-            print("\n".join(changes) if changes else "No wording differences.")
+        _execute(args)
     except (RuntimeError, ValueError, OSError, json.JSONDecodeError) as err:
         print(f"Problem: {err}", file=sys.stderr)
         return 1

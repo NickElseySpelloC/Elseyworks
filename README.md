@@ -13,7 +13,7 @@ hosted on GitHub Pages (`.github/workflows/deploy.yml`, deploys on every push to
 | `content/about.md`, `content/writing/` | Bio + contact form, and the full archive |
 | `layouts/` | Page templates, partials and shortcodes |
 | `assets/css/main.css`, `assets/img/` | Styles and Lynn's portrait |
-| `scripts/` | `preview.sh`, `publish.sh`, `extract_source.py` (unpacks Word/PDF sources), `check_content.py`, `setup.sh` |
+| `scripts/` | `preview.sh`, `publish.sh`, `extract_source.py` (unpacks Word/PDF sources), `proof_docx.py` (tracked-changes proofreading), `check_content.py`, `setup.sh` |
 | `CLAUDE.md`, `.claude/skills/` | Instructions for the Claude assistant Lynn uses to manage the site |
 | `design/` | Brief and design notes |
 
