@@ -16,7 +16,18 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 ## 3. Help skill ✅ DONE (committed, not pushed)
 - [x] Create a "Help skill" for Lynn — `.claude/skills/help/SKILL.md`: friendly plain-English menu of what she can ask for (preview, change an article, proofread, add an article, look-and-feel, publish), expands on any one on request. Added to the `CLAUDE.md` skills table.
 
-## 4. Set up Lynn's desktop (needs Nick at her machine)
+## 4. Design and site follow-ups to be done by Nick
+
+- [ ] Nick's style-guide document from Lynn: fold into `style-guide.md` (currently: headlines one font/colour with no trailing full stop; always light).
+- [ ] Mobile layout check of all page types (only checked on a desktop viewport so far); check dark-mode removal looks right on phones.
+- [x] Google Analytics ID (`G-G6X0C9Z7F4`) – confirm it is the right property for this site.
+- [x] Redirects from elseyworld.com to elseyworks.com (Nick, Cloudflare) once ready.
+- [ ] Optional: 
+  - [ ] site search
+  - [ ] sitemap/SEO check
+  - [x] RSS - not wanted
+
+## 5. Set up Lynn's desktop (needs Nick at her machine)
 - [ ] Install Claude Code (desktop app) and sign her in.
 - [ ] Install Homebrew, then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
 - [ ] Clone `NickElseySpelloC/Elseyworks` and give her machine git push access (GitHub login / token or SSH key). Check `git push` works.
@@ -27,19 +38,14 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 - [ ] Walk her through the preview / approve / publish flow and how to ask for changes.
 - [ ] Decide what she does if something goes wrong (call Nick). Consider a short one-page "how to talk to your assistant" sheet.
 
-## 5. Design and site follow-ups
+## 6. Design and site follow-ups to be done with Lynn
 - [ ] Run the `proofread-article` workflow on the other 24 articles, one at a time, typos and OCR errors only.
-- [ ] Nick's style-guide document from Lyn7n: fold into `style-guide.md` (currently: headlines one font/colour with no trailing full stop; always light).
 - [ ] "Elsey*works*" logo is two-tone – ask Lynn whether she wants it one style (the headline rule may not apply to a logo).
-- [ ] Mobile layout check of all page types (only checked on a desktop viewport so far); check dark-mode removal looks right on phones.
 - [ ] Contact form: send a real test message through Web3Forms and confirm it reaches Lynn.
 - [ ] Article thumbnails are a mix of covers and landscapes; review cards on each subject page and re-crop any that look poor.
-- [ ] Google Analytics ID (`G-G6X0C9Z7F4`) – confirm it is the right property for this site.
-- [ ] Redirects from elseyworld.com to elseyworks.com (Nick, Cloudflare) once ready.
 - [ ] The featured articles on the home page (Verona, Age Discrimination, Rome, Terri Janke) were my picks – get Lynn's choices.
-- [ ] Optional: site search, sitemap/SEO check, RSS.
 
 ## 6. Housekeeping
-- [ ] Push the 3 local commits (and later ones) when the connection is good.
-- [ ] Verify the GitHub Pages deploy after each push.
-- [ ] `git status` clean-up: `.claude/settings.local.json` is per-machine; consider adding it to `.gitignore`.
+- [x] Push the 3 local commits (and later ones) when the connection is good.
+- [x] Verify the GitHub Pages deploy after each push.
+- [x] `git status` clean-up: `.claude/settings.local.json` is per-machine; consider adding it to `.gitignore`.
