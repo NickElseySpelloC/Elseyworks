@@ -5,6 +5,16 @@ The website for Lynn Elsey's writing – <https://elseyworks.com>.
 Built with [Hugo](https://gohugo.io) using a custom "warm editorial" design (no external theme),
 hosted on GitHub Pages (`.github/workflows/deploy.yml`, deploys on every push to `main`).
 
+This README has three parts:
+
+1. [About the site](#part-1--about-the-site) – what's in the project (for Nick)
+2. [How to install](#part-2--how-to-install) – setting up a Mac so Lynn can work on the site (for Nick)
+3. [How to use your website assistant](#part-3--how-to-use-your-website-assistant) – a guide written for Lynn
+
+---
+
+# Part 1 – About the site
+
 ## Layout
 
 | Path | What |
@@ -13,14 +23,14 @@ hosted on GitHub Pages (`.github/workflows/deploy.yml`, deploys on every push to
 | `content/about.md`, `content/writing/` | Bio + contact form, and the full archive |
 | `layouts/` | Page templates, partials and shortcodes |
 | `assets/css/main.css`, `assets/img/` | Styles and Lynn's portrait |
-| `scripts/` | `preview.sh`, `publish.sh`, `extract_source.py` (unpacks Word/PDF sources), `proof_docx.py` (tracked-changes proofreading), `check_content.py`, `setup.sh` |
-| `CLAUDE.md`, `.claude/skills/` | Instructions for the Claude assistant Lynn uses to manage the site |
-| `design/` | Brief and design notes |
+| `scripts/` | `setup.sh`, `preview.sh`, `stop-preview.sh`, `publish.sh`, `extract_source.py` (unpacks Word/PDF sources), `proof_docx.py` (tracked-changes proofreading), `check_content.py` |
+| `CLAUDE.md`, `style-guide.md`, `.claude/skills/` | Instructions for the Claude assistant Lynn uses, and Lynn's style rules. Skills: `add-article`, `edit-article`, `proofread-article`, `preview`, `publish`, `help` |
+| `design/` | Brief, design notes and the outstanding-tasks list (`TODO.md`) |
 
-## Working on the site
+## Working on the site (Nick)
 
 ```bash
-scripts/setup.sh     # once per computer: installs hugo, poppler, pandoc, uv
+scripts/setup.sh     # once per computer: installs hugo, poppler, pandoc, uv, git and the Python tools
 scripts/preview.sh   # local preview at http://localhost:1313/
 uv run pytest        # content checks + tests
 uv run ruff check . && uv run mypy --strict scripts tests
@@ -46,3 +56,223 @@ Shortcodes: `lead`, `callout`, `img-caption`, `img-caption-float`, `img-float`, 
 ## Contact form
 
 Uses [Web3Forms](https://web3forms.com); the access key is in `config/_default/hugo.toml`.
+
+---
+
+# Part 2 – How to install
+
+A step-by-step for **Nick** to turn an out-of-the-box Mac into a working Elseyworks machine for Lynn.
+Run these in **Terminal** (Applications → Utilities → Terminal) unless noted.
+
+**Machine:** 2019 iMac Retina 5K, **Intel**, macOS 15.8.1 (Sequoia).
+
+> ⚠️ **Intel note:** on this Intel Mac, Homebrew installs to **`/usr/local`** (not `/opt/homebrew` as on Apple
+> Silicon). The PATH line in Step 2 reflects that. Everything else is arch-independent — Homebrew fetches the
+> right build automatically.
+
+### Step 0: Before you start
+- [ ] macOS fully updated (Apple menu → System Settings → General → Software Update).
+- [ ] Signed in to the **App Store** with an Apple ID (needed if you install Pages/Word from there).
+- [ ] Know which GitHub account gets push access, and Lynn's name + email for commit attribution.
+- [ ] A stable internet connection (first Homebrew + `uv sync` pull a fair bit down).
+
+### Step 1: Xcode Command Line Tools (git, compilers)
+The Homebrew installer in Step 2 installs these automatically. To do it explicitly first:
+```bash
+xcode-select --install
+```
+Click through the dialog and wait for it to finish.
+
+### Step 2: Homebrew (the package manager)
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+Then add it to the PATH for this Intel Mac (the installer also prints these two lines — use its version if different):
+```bash
+echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/usr/local/bin/brew shellenv)"
+```
+Check it works:
+```bash
+brew --version
+```
+
+### Step 3: Command-line tools Elseyworks needs
+```bash
+brew install git gh uv hugo pandoc poppler
+```
+- **git** – version control (also came with the Command Line Tools; brew keeps it current).
+- **gh** – GitHub CLI, used in Step 5 to give the machine push access the easy way.
+- **uv** – Python tool/venv manager; pulls Python 3.13, ruff, mypy and pytest itself in Step 7.
+- **hugo** – builds the website (Homebrew's hugo is the *extended* build the site requires).
+- **pandoc** – converts between Word and the site's text (proofreading + new-article workflows).
+- **poppler** – reads and renders PDFs (`pdftotext`, `pdftoppm`, `pdfimages`).
+
+Confirm they're all on the PATH:
+```bash
+for t in git gh uv hugo pandoc pdftoppm; do printf '%-8s ' "$t"; command -v "$t" || echo MISSING; done
+hugo version   # should say "+extended"
+```
+
+### Step 4: Claude Code (the desktop app Lynn will use)
+- [ ] Download the **Claude desktop app** for macOS from <https://claude.ai/download> and drag it to Applications.
+- [ ] Open it and **sign in** with Lynn's Claude account (the one on the plan that includes Claude Code).
+- [ ] Confirm the app has a **Code** tab (this is what she'll work in). No VS Code needed.
+
+### Step 5: GitHub access (so changes can be published)
+Authenticate the machine with GitHub. `gh` will also offer to set up git so pushing "just works" — say **yes**.
+```bash
+gh auth login
+```
+Choose: **GitHub.com** → **HTTPS** → **Yes** (authenticate Git with your GitHub credentials) → **Login with a
+web browser**, then paste the code. When done:
+```bash
+gh auth status              # should show logged in
+```
+Set who commits are attributed to (use Lynn's details):
+```bash
+git config --global user.name  "Lynn Elsey"
+git config --global user.email "lynn@example.com"    # <-- Lynn's email
+```
+
+### Step 6: Get the website
+Clone the repo into a sensible spot (e.g. a `dev` folder in her home directory):
+```bash
+mkdir -p ~/dev && cd ~/dev
+gh repo clone NickElseySpelloC/Elseyworks
+cd Elseyworks
+```
+
+### Step 7: Install the site's Python tools
+```bash
+cd ~/dev/Elseyworks
+./scripts/setup.sh
+```
+This runs `uv sync`, which fetches Python 3.13 and the dev tools (ruff, mypy, pytest).
+> **Note:** `scripts/setup.sh` installs hugo/poppler/pandoc/uv/git but not `gh` — that's why `gh` is in the manual
+> `brew install` at Step 3.
+
+### Step 8: Microsoft Word (for the proofreading workflow)
+The proofreading and new-article skills open a `.docx` for Lynn to edit, and read it back with tracked changes.
+Lynn uses **Word** (her preference).
+- [ ] Install **Microsoft Word** and sign in to her Microsoft 365 account.
+- [ ] Make sure double-clicking a `.docx` opens **Word** (not TextEdit or Pages, which handle tracked changes
+      poorly). If needed: right-click a `.docx` → Get Info → Open with: Microsoft Word → **Change All…**
+- [ ] Test that the workflow's path and Word launch both work:
+```bash
+mkdir -p ~/Documents/Elseyworks
+printf '%s' 'hello' | pandoc -o ~/Documents/Elseyworks/test.docx && open ~/Documents/Elseyworks/test.docx
+```
+      It should open in Word showing "hello". Then delete `~/Documents/Elseyworks/test.docx`.
+
+### Step 9: Prove the whole toolchain works
+From `~/dev/Elseyworks`:
+```bash
+uv run pytest -q                        # expect: all pass (a few may skip if a tool is missing)
+uv run ruff check .                     # expect: All checks passed!
+uv run python scripts/check_content.py  # expect: All NN articles look good.
+./scripts/preview.sh                     # prints http://localhost:1313/
+```
+- [ ] Open **http://localhost:1313/** in a web browser (Safari is fine) and confirm the site loads and looks right.
+- [ ] Stop the preview when done: `./scripts/stop-preview.sh`
+
+### Step 10: Open the project in Claude Code
+- [ ] In the Claude desktop app → **Code** tab, open the folder `~/dev/Elseyworks`.
+- [ ] Confirm the assistant picks up the project instructions and skills: ask it **"what can you do?"** — it should
+      run the **help** skill and list add / change / proofread / add-article / look-and-feel / publish.
+- [ ] Do a quick **dry run** with Lynn watching: ask it to show a preview, make a tiny reversible change, preview
+      again, then discard it (don't publish the throwaway).
+
+### Step 11: Hand-over to Lynn
+- [ ] Show her how to open the Claude desktop app and the Code tab, and that she just types in plain English.
+- [ ] Point her at **"what can you do?"** / **"I need help"** as her starting point.
+- [ ] Agree what she does if something looks wrong: **call Nick** (the assistant is told to say this too).
+- [ ] Optional: print a one-page "how to talk to your assistant" sheet (can be generated from the `help` skill).
+
+### Everything installed – quick reference
+| Tool | Why | Installed in |
+|------|-----|--------------|
+| Homebrew | package manager | Step 2 |
+| git, gh | version control + GitHub access/publishing | Step 3, 5 |
+| uv | Python + ruff/mypy/pytest + Python 3.13 | Step 3, 7 |
+| hugo (extended) | builds the website | Step 3 |
+| pandoc | Word ↔ site text | Step 3 |
+| poppler | reads/renders PDFs | Step 3 |
+| Claude desktop app | what Lynn uses | Step 4 |
+| Microsoft Word | proofreading `.docx` with tracked changes | Step 8 |
+
+_Not installing:_ VS Code, Node (the desktop app doesn't need it), Xcode (full IDE — Command Line Tools are enough).
+
+---
+
+# Part 3 – How to use your website assistant
+
+Hello Lynn! This part is just for you. Your website is looked after by an assistant you chat with
+in plain English – like emailing a helpful editor's assistant. There are no commands to learn and nothing
+technical to do. If you can type a message, you can run your website.
+
+## Starting up
+
+1. Open the **Claude** app (it's in your Applications folder, and in the Dock).
+2. Click the **Code** tab at the top.
+3. Choose the **Elseyworks** project if it isn't already showing.
+4. Type what you'd like, in your own words, and press Enter.
+
+Not sure where to start? Type **"What can you do?"** and the assistant will give you a friendly list.
+
+## What you can ask for
+
+| You could say… | What happens |
+|---|---|
+| "Show me the site." | A private preview of your website opens, so you can see it exactly as visitors will. Only you can see it. |
+| "Add this article." (and share the file) | Give the assistant a Word document or a PDF (a scan is fine) and any photos. It builds a new page and shows you a preview. |
+| "Can you change the date on the Rome article?" | Fixes a detail, swaps a picture, changes a title, or takes an article down. |
+| "Please check the Verona article for typos." | The assistant looks for spelling and scanning mistakes only – it never touches your wording. |
+| "I'd like the headings a bit bigger." | Small changes to colours, fonts, spacing and the wording of menus. |
+| "Looks good, publish it." | Puts your approved changes live on elseyworks.com. |
+
+You don't need special phrases – just say what you want, the way you'd tell a person.
+
+## Adding a new article
+
+1. Tell the assistant: **"Add this article,"** and share the Word document or PDF. Share any photos too.
+2. If it's a scan of a printed page, the assistant types it up first and opens a **Word document** for you to read
+   through. Fix anything you like in Word and save it. Whatever you change is used exactly as you wrote it.
+3. The assistant builds the page and shows you a preview. It may ask a quick question, such as which
+   subject it belongs under, and will suggest an answer.
+4. Look it over. Ask for any changes you'd like.
+5. When you're happy, say **"Publish it."**
+
+## Checking an article for typos
+
+Many of your articles were scanned in, so the odd letter may have gone astray. Ask the assistant to check one.
+For a few mistakes it simply tells you what it fixed. For a longer list it opens a **Word document** with its
+suggestions marked as tracked changes:
+
+- **Accept** the ones you agree with, and **reject** any you don't.
+- Save the document, then tell the assistant you're done.
+
+It only ever fixes genuine mistakes, never your writing style, and it will ask you if it's unsure
+(for example a name or a number).
+
+## Looking at the preview
+
+Say **"Show me the site"** at any time. The preview opens in your web browser. Click around as a visitor would.
+Nothing you see in the preview is public until you say so. When you've finished, the assistant
+closes the preview for you.
+
+## Publishing
+
+When you've seen the preview and you're happy, say **"Looks good, publish it."** The assistant puts the changes on
+your website, and they usually appear within a minute or two. It will **never** publish until you've looked and
+said yes.
+
+## Telling the assistant your preferences
+
+If there's something you always (or never) want – "I don't like full stops at the end of headings" – just say so.
+The assistant will apply it from then on and keep a note of it in your style guide.
+
+## If something looks wrong
+
+Don't worry – nothing goes live without your approval, and changes can be undone. If the assistant says it
+can't fix something, or the website looks odd, **call Nick** and tell him what you asked for and what you saw.

@@ -28,6 +28,8 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
   - [x] RSS - not wanted
 
 ## 5. Set up Lynn's desktop (needs Nick at her machine)
+_Follow README.md, Part 2 – How to install._
+
 - [ ] Install Claude Code (desktop app) and sign her in.
 - [ ] Install Homebrew, then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
 - [ ] Clone `NickElseySpelloC/Elseyworks` and give her machine git push access (GitHub login / token or SSH key). Check `git push` works.
