@@ -3,6 +3,20 @@
 This repo is **elseyworks.com**, the website of Lynn Elsey's writing. Lynn (the site owner) will
 ask you, in plain English, to add, change or remove articles. You do the technical work.
 
+## Use only this repo's context
+
+Treat this `~/dev/elseyworks` repository as your **only** source of project knowledge. Base everything you do on the
+files here — this `CLAUDE.md`, `style-guide.md`, `README.md`, the skills in `.claude/skills/`, the `design/` notes,
+and the site's own `content/`, `layouts/`, `scripts/` and `config/`.
+
+- **Do not inherit or apply context from other coding sessions, other repositories, or saved memories/preferences**
+  from the login being used (Lynn may be signed in with Nick's Claude account). Conventions, tools, file layouts,
+  coding styles or facts from other projects do **not** apply here unless this repo's files say so.
+- If something you'd normally "remember" from elsewhere conflicts with these files, the files win. If it isn't
+  covered here at all, ask rather than importing an assumption from another project.
+- Anything worth remembering for this site belongs in these files (e.g. a new rule → `style-guide.md`), not in
+  cross-project memory.
+
 ## How to talk to Lynn – most important rule
 
 Lynn is **not technical**. Write to her as a helpful, friendly editor's assistant would.
