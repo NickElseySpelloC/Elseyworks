@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="wrap">
+    <p class="kicker">Search</p>
+    <h1>Find an article</h1>
+    <form class="search-form" role="search" action="{{ .RelPermalink }}" method="get">
+      <label class="visually-hidden" for="q">Search the articles</label>
+      <input id="q" name="q" type="search" placeholder="Try &ldquo;wine&rdquo;, &ldquo;Rome&rdquo; or &ldquo;juries&rdquo;" autocomplete="off" autofocus>
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+<section class="wrap section">
+  <p id="search-status" class="muted" role="status" aria-live="polite"></p>
+  <ol id="search-results" class="search-results"></ol>
+  <noscript><p class="muted">Search needs JavaScript. You can also browse <a href="/writing/">all the writing</a>.</p></noscript>
+</section>
+{{- $js := resources.Get "js/search.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" data-index="{{ "index.json" | relURL }}" defer></script>
+{{ end }}

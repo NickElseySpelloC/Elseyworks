@@ -1,0 +1,13 @@
+{{- /* Search index: one entry per article (and the About page), read by assets/js/search.js */ -}}
+{{- $items := slice -}}
+{{- range where site.RegularPages "Kind" "page" -}}
+  {{- $items = $items | append (dict
+      "title" .Title
+      "url" .RelPermalink
+      "description" (.Description | default "")
+      "section" (cond (eq .Section "") "" .Parent.Title)
+      "publication" (.Params.publication | default "")
+      "date" (.Date.Format "January 2006")
+      "text" (.Plain | replaceRE `\s+` " " | strings.TrimSpace)) -}}
+{{- end -}}
+{{- $items | jsonify -}}

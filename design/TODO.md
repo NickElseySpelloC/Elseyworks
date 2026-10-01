@@ -18,13 +18,12 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 
 ## 4. Design and site follow-ups to be done by Nick
 
-- [ ] Nick's style-guide document from Lynn: fold into `style-guide.md` (currently: headlines one font/colour with no trailing full stop; always light).
 - [ ] Mobile layout check of all page types (only checked on a desktop viewport so far); check dark-mode removal looks right on phones.
 - [x] Google Analytics ID (`G-G6X0C9Z7F4`) – confirm it is the right property for this site.
 - [x] Redirects from elseyworld.com to elseyworks.com (Nick, Cloudflare) once ready.
-- [ ] Optional: 
-  - [ ] site search
-  - [ ] sitemap/SEO check
+- [x] Optional: 
+  - [x] site search — `/search/` page, client-side over `index.json` (no dependencies); "Search" link in the menu
+  - [x] sitemap/SEO check — robots.txt now lists the sitemap and hides /search/; Article structured data added; two long meta descriptions left as is (portland, nobel-secrets)
   - [x] RSS - not wanted
 
 ## 5. Set up Lynn's desktop (needs Nick at her machine)
@@ -41,6 +40,7 @@ _Follow README.md, Part 2 – How to install._
 - [ ] Decide what she does if something goes wrong (call Nick). Consider a short one-page "how to talk to your assistant" sheet.
 
 ## 6. Design and site follow-ups to be done with Lynn
+- [ ] Give Claude a copy of your style-guide document and ask it to incorporate into the Elseyworks style guide (`style-guide.md` ). (Currently the style guide only has this: headlines one font/colour with no trailing full stop; always light theme).
 - [ ] Run the `proofread-article` workflow on the other 24 articles, one at a time, typos and OCR errors only.
 - [ ] "Elsey*works*" logo is two-tone – ask Lynn whether she wants it one style (the headline rule may not apply to a logo).
 - [ ] Contact form: send a real test message through Web3Forms and confirm it reaches Lynn.

@@ -10,6 +10,7 @@
       {{- range site.Menus.main }}
       <a href="{{ .URL }}"{{ if or ($cur.IsMenuCurrent "main" .) ($cur.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
       {{- end }}
+      <a href="/search/" class="nav-search"{{ if eq .RelPermalink "/search/" }} aria-current="page"{{ end }}>Search</a>
     </nav>
   </div>
 </header>

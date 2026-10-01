@@ -14,7 +14,7 @@ summaryLength = 0
   contactAccessKey = "e5a31f0c-9418-4615-9f3f-83aa19b98004"
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
 
 [markup.goldmark.renderer]
   unsafe = true
