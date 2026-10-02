@@ -18,7 +18,7 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 
 ## 4. Design and site follow-ups to be done by Nick
 
-- [ ] Mobile layout check of all page types (only checked on a desktop viewport so far); check dark-mode removal looks right on phones.
+- [x] Mobile layout check of all page types (only checked on a desktop viewport so far); check dark-mode removal looks right on phones.
 - [x] Google Analytics ID (`G-G6X0C9Z7F4`) – confirm it is the right property for this site.
 - [x] Redirects from elseyworld.com to elseyworks.com (Nick, Cloudflare) once ready.
 - [x] Optional: 
@@ -29,12 +29,12 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 ## 5. Set up Lynn's desktop (needs Nick at her machine)
 _Follow README.md, Part 2 – How to install._
 
-- [ ] Install Claude Code (desktop app) and sign her in.
-- [ ] Install the package manager (MacPorts on the Intel iMac; Homebrew on the M1 MacBook Air), then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
-- [ ] Clone `NickElseySpelloC/Elseyworks` and give her machine git push access (GitHub login / token or SSH key). Check `git push` works.
-- [ ] Open the project in Claude Code and confirm `CLAUDE.md` and the skills load (`add-article`, `edit-article`, `preview`, `publish`).
-- [ ] Confirm Word (or Pages) is installed and that `open` starts it for `.docx` files.
-- [ ] Check her machine handles the preview at `http://localhost:1313/` and the `~/Documents/Elseyworks/` folder for Word files.
+- [x] Install Claude Code (desktop app) and sign her in.
+- [x] Install the package manager (MacPorts on the Intel iMac; Homebrew on the M1 MacBook Air), then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
+- [x] Clone `NickElseySpelloC/Elseyworks` and give her machine git push access (GitHub login / token or SSH key). Check `git push` works.
+- [x] Open the project in Claude Code and confirm `CLAUDE.md` and the skills load (`add-article`, `edit-article`, `preview`, `publish`).
+- [x] Confirm Word (or Pages) is installed and that `open` starts it for `.docx` files.
+- [x] Check her machine handles the preview at `http://localhost:1313/` and the `~/Documents/Elseyworks/` folder for Word files.
 - [ ] Dry-run the full workflow with her: add a real (or throwaway) article from a scanned PDF → Word proofread → preview → publish. Delete any throwaway afterwards.
 - [ ] Walk her through the preview / approve / publish flow and how to ask for changes.
 - [ ] Decide what she does if something goes wrong (call Nick). Consider a short one-page "how to talk to your assistant" sheet.
