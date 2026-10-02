@@ -64,54 +64,89 @@ Uses [Web3Forms](https://web3forms.com); the access key is in `config/_default/h
 A step-by-step for **Nick** to turn an out-of-the-box Mac into a working Elseyworks machine for Lynn.
 Run these in **Terminal** (Applications → Utilities → Terminal) unless noted.
 
-**Machine:** 2019 iMac Retina 5K, **Intel**, macOS 15.8.1 (Sequoia).
+**Machines:**
+- Desktop: 2019 iMac Retina 5K, **Intel**, macOS 15.8.1 (Sequoia) → use **Step 2B (MacPorts)** and **Step 3B**.
+- Laptop: MacBook Air M1, **Apple Silicon** → use **Step 2A (Homebrew)** and **Step 3A**.
 
-> ⚠️ **Intel note:** on this Intel Mac, Homebrew installs to **`/usr/local`** (not `/opt/homebrew` as on Apple
-> Silicon). The PATH line in Step 2 reflects that. Everything else is arch-independent — Homebrew fetches the
-> right build automatically.
+> ⚠️ **Which package manager?** Homebrew has dropped support for Intel Macs and recommends MacPorts instead. So:
+> **Apple Silicon → Homebrew (2A/3A). Intel → MacPorts (2B/3B).** Check which you have with `uname -m`
+> (`arm64` = Apple Silicon, `x86_64` = Intel). Every other step is the same on both.
 
 ### Step 0: Before you start
 - [ ] macOS fully updated (Apple menu → System Settings → General → Software Update).
 - [ ] Signed in to the **App Store** with an Apple ID (needed if you install Pages/Word from there).
 - [ ] Know which GitHub account gets push access, and Lynn's name + email for commit attribution.
-- [ ] A stable internet connection (first Homebrew + `uv sync` pull a fair bit down).
+- [ ] A stable internet connection (first Homebrew/MacPorts + `uv sync` pull a fair bit down).
 
 ### Step 1: Xcode Command Line Tools (git, compilers)
-The Homebrew installer in Step 2 installs these automatically. To do it explicitly first:
+The Homebrew installer in Step 2A installs these automatically; MacPorts (Step 2B) needs them first. To do it explicitly:
 ```bash
 xcode-select --install
 ```
 Click through the dialog and wait for it to finish.
 
-### Step 2: Homebrew (the package manager)
+### Step 2A: Apple Silicon Mac – Homebrew (the package manager)
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-Then add it to the PATH for this Intel Mac (the installer also prints these two lines — use its version if different):
+Then add it to the PATH (on Apple Silicon Homebrew lives in `/opt/homebrew`; the installer also prints these two
+lines — use its version if different):
 ```bash
-echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/usr/local/bin/brew shellenv)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 Check it works:
 ```bash
 brew --version
 ```
 
-### Step 3: Command-line tools Elseyworks needs
+### Step 2B: Intel Mac – MacPorts (the package manager)
+Homebrew no longer supports Intel Macs, so use [MacPorts](https://www.macports.org) instead. It needs the Xcode
+Command Line Tools from Step 1 (do that step first, and accept the Xcode licence: `sudo xcodebuild -license accept`).
+- [ ] Download the MacPorts **`.pkg` installer for the Mac's macOS version** (e.g. "macOS 15 Sequoia") from
+      <https://www.macports.org/install.php> and double-click it to install.
+- [ ] Open a **new** Terminal window (the installer adds `/opt/local/bin` to the PATH in `~/.zprofile`) and check:
+```bash
+port version
+```
+If `port` is not found, add it by hand and try again:
+```bash
+echo 'export PATH="/opt/local/bin:/opt/local/sbin:$PATH"' >> ~/.zprofile
+source ~/.zprofile
+```
+Bring MacPorts up to date:
+```bash
+sudo port selfupdate
+```
+
+### Step 3A: Apple Silicon Mac – command-line tools (Homebrew)
 ```bash
 brew install git gh uv hugo pandoc poppler
 ```
-- **git** – version control (also came with the Command Line Tools; brew keeps it current).
+- **git** – version control (also came with the Command Line Tools; the package manager keeps it current).
 - **gh** – GitHub CLI, used in Step 5 to give the machine push access the easy way.
 - **uv** – Python tool/venv manager; pulls Python 3.13, ruff, mypy and pytest itself in Step 7.
-- **hugo** – builds the website (Homebrew's hugo is the *extended* build the site requires).
+- **hugo** – builds the website (Homebrew's hugo is the *extended* build; the site's styles are plain CSS so the
+  standard build is also fine).
 - **pandoc** – converts between Word and the site's text (proofreading + new-article workflows).
 - **poppler** – reads and renders PDFs (`pdftotext`, `pdftoppm`, `pdfimages`).
 
 Confirm they're all on the PATH:
 ```bash
 for t in git gh uv hugo pandoc pdftoppm; do printf '%-8s ' "$t"; command -v "$t" || echo MISSING; done
-hugo version   # should say "+extended"
+hugo version   # Homebrew's build says "+extended"; MacPorts' may not, which is fine for this site
+```
+
+### Step 3B: Intel Mac – command-line tools (MacPorts)
+```bash
+sudo port install git gh uv hugo pandoc poppler
+```
+Same tools as Step 3A (see the list above). **This can take a long time** (up to an hour or more) because MacPorts
+may compile some of them (pandoc and poppler especially) from source on an Intel Mac. Start it before Lynn needs the
+machine and leave it running. Then run the same check as Step 3A:
+```bash
+for t in git gh uv hugo pandoc pdftoppm; do printf '%-8s ' "$t"; command -v "$t" || echo MISSING; done
+hugo version
 ```
 
 ### Step 4: Claude Code (the desktop app Lynn will use)
@@ -149,8 +184,9 @@ cd ~/dev/Elseyworks
 ./scripts/setup.sh
 ```
 This runs `uv sync`, which fetches Python 3.13 and the dev tools (ruff, mypy, pytest).
-> **Note:** `scripts/setup.sh` installs hugo/poppler/pandoc/uv/git but not `gh` — that's why `gh` is in the manual
-> `brew install` at Step 3.
+> **Note:** `scripts/setup.sh` detects Homebrew or MacPorts and installs hugo/poppler/pandoc/uv/git with
+> whichever it finds (already-installed tools are skipped). It does not install `gh` — that's why `gh` is in the
+> manual install at Step 3A/3B.
 
 ### Step 8: Microsoft Word (for the proofreading workflow)
 The proofreading and new-article skills open a `.docx` for Lynn to edit, and read it back with tracked changes.
@@ -192,12 +228,12 @@ uv run python scripts/check_content.py  # expect: All NN articles look good.
 ### Everything installed – quick reference
 | Tool | Why | Installed in |
 |------|-----|--------------|
-| Homebrew | package manager | Step 2 |
-| git, gh | version control + GitHub access/publishing | Step 3, 5 |
-| uv | Python + ruff/mypy/pytest + Python 3.13 | Step 3, 7 |
-| hugo (extended) | builds the website | Step 3 |
-| pandoc | Word ↔ site text | Step 3 |
-| poppler | reads/renders PDFs | Step 3 |
+| Homebrew (Apple Silicon) or MacPorts (Intel) | package manager | Step 2A / 2B |
+| git, gh | version control + GitHub access/publishing | Step 3A/3B, 5 |
+| uv | Python + ruff/mypy/pytest + Python 3.13 | Step 3A/3B, 7 |
+| hugo | builds the website | Step 3A/3B |
+| pandoc | Word ↔ site text | Step 3A/3B |
+| poppler | reads/renders PDFs | Step 3A/3B |
 | Claude desktop app | what Lynn uses | Step 4 |
 | Microsoft Word | proofreading `.docx` with tracked changes | Step 8 |
 

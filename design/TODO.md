@@ -30,7 +30,7 @@ _Last updated 2026-09-30. Local `main` is ahead of GitHub (not pushed). Section 
 _Follow README.md, Part 2 – How to install._
 
 - [ ] Install Claude Code (desktop app) and sign her in.
-- [ ] Install Homebrew, then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
+- [ ] Install the package manager (MacPorts on the Intel iMac; Homebrew on the M1 MacBook Air), then run `scripts/setup.sh` (installs hugo, poppler, pandoc, uv, git and the Python tools).
 - [ ] Clone `NickElseySpelloC/Elseyworks` and give her machine git push access (GitHub login / token or SSH key). Check `git push` works.
 - [ ] Open the project in Claude Code and confirm `CLAUDE.md` and the skills load (`add-article`, `edit-article`, `preview`, `publish`).
 - [ ] Confirm Word (or Pages) is installed and that `open` starts it for `.docx` files.
