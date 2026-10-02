@@ -139,7 +139,7 @@ hugo version   # Homebrew's build says "+extended"; MacPorts' may not, which is 
 
 ### Step 3B: Intel Mac – command-line tools (MacPorts)
 ```bash
-sudo port install git gh uv hugo pandoc poppler
+sudo port -N install git gh uv hugo pandoc poppler
 ```
 Same tools as Step 3A (see the list above). **This can take a long time** (up to an hour or more) because MacPorts
 may compile some of them (pandoc and poppler especially) from source on an Intel Mac. Start it before Lynn needs the
