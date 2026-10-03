@@ -8,9 +8,16 @@
     <nav class="site-nav" aria-label="Main">
       {{- $cur := . -}}
       {{- range site.Menus.main }}
+      {{- if ne .Name "About" }}
       <a href="{{ .URL }}"{{ if or ($cur.IsMenuCurrent "main" .) ($cur.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
       {{- end }}
-      <a href="/search/" class="nav-search"{{ if eq .RelPermalink "/search/" }} aria-current="page"{{ end }}>Search</a>
+      {{- end }}
+      <a href="/about/"{{ if eq .RelPermalink "/about/" }} aria-current="page"{{ end }}>About Lynn</a>
+      <form class="nav-search" role="search" action="/search/" method="get">
+        <label class="visually-hidden" for="nav-q">Search the articles</label>
+        <input id="nav-q" name="q" type="search" placeholder="Search" autocomplete="off">
+        <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      </form>
     </nav>
   </div>
 </header>
