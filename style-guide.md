@@ -14,3 +14,6 @@ and adds a new line here whenever Lynn gives a new rule.
 - The photo of Lynn at the top of the home page is square (not arch-shaped).
 - The name "Elseyworks" (top of the page and footer) is all in one font, a plain, easy-to-read italic serif (no flowery letters) throughout: "Elsey" in black, "works" in the rust colour (not bold).
 - The top menu ends with "About Lynn" and then a search box with a magnifying-glass icon (far right). There are no "Read the writing" / "About Lynn" buttons on the home page.
+
+## Writing
+- Em dashes always have a space on each side (e.g. "areas — from food").
